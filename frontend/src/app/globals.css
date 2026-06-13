@@ -1,0 +1,63 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700;800;900&family=Inter:wght@400;500;600;700&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html { scroll-behavior: smooth; }
+  body { @apply font-sans text-gray-800 antialiased; }
+  * { @apply box-border; }
+}
+
+@layer components {
+  .btn-primary {
+    @apply bg-gold text-primary font-bold px-8 py-3 rounded-lg hover:bg-gold-dark transition-all duration-300 hover:shadow-lg hover:-translate-y-0.5 inline-flex items-center gap-2;
+  }
+  .btn-outline {
+    @apply border-2 border-white text-white font-semibold px-8 py-3 rounded-lg hover:bg-white hover:text-primary transition-all duration-300 inline-flex items-center gap-2;
+  }
+  .btn-outline-gold {
+    @apply border-2 border-gold text-gold font-semibold px-6 py-2.5 rounded-lg hover:bg-gold hover:text-primary transition-all duration-300 inline-flex items-center gap-2;
+  }
+  .section-title {
+    @apply text-3xl md:text-4xl font-bold text-primary;
+  }
+  .section-subtitle {
+    @apply text-gold font-semibold uppercase tracking-widest text-sm;
+  }
+  .card {
+    @apply bg-white rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 hover:-translate-y-1;
+  }
+  .glass {
+    @apply bg-white/10 backdrop-blur-md border border-white/20;
+  }
+  .input-field {
+    @apply w-full px-4 py-3 border border-gray-200 rounded-xl focus:ring-2 focus:ring-gold focus:border-transparent outline-none transition-all duration-200 bg-white;
+  }
+  .admin-card {
+    @apply bg-white rounded-2xl shadow-sm border border-gray-100 p-6;
+  }
+}
+
+/* Swiper */
+.swiper-pagination-bullet { @apply bg-primary/40 !important; }
+.swiper-pagination-bullet-active { @apply bg-gold !important; }
+.swiper-button-next, .swiper-button-prev { @apply text-primary !important; }
+
+/* Animations */
+@keyframes shimmer {
+  0% { background-position: -1000px 0; }
+  100% { background-position: 1000px 0; }
+}
+.skeleton {
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 1000px 100%;
+  animation: shimmer 2s infinite;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar { width: 6px; }
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #0B1F4D; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #D4AF37; }
