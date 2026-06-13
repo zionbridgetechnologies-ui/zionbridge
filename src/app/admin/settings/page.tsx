@@ -78,7 +78,7 @@ export default function SettingsPage() {
               <div><label className="text-sm font-medium text-gray-600 block mb-1">Office Address</label>
                 <textarea className="input-field resize-none" rows={2} value={settings.company_address || ''} onChange={e => set('company_address', e.target.value)} /></div>
               <div><label className="text-sm font-medium text-gray-600 block mb-1">WhatsApp Number (with country code)</label>
-                <input className="input-field" placeholder="919876543210" value={settings.whatsapp_number || ''} onChange={e => set('whatsapp_number', e.target.value)} /></div>
+                <input className="input-field" placeholder="917893045803" value={settings.whatsapp_number || ''} onChange={e => set('whatsapp_number', e.target.value)} /></div>
             </div>
           </div>
 

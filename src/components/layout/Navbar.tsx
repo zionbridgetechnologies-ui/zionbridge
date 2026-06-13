@@ -51,11 +51,11 @@ export default function Navbar() {
           <div className="flex gap-6 items-center">
             <span className="flex items-center gap-1.5">
               <Icons.Enquiries className="w-4 h-4 text-gold" />
-              info@zionbridgetechnologies.com
+              zionbridgetechnologies@gmail.com
             </span>
             <span className="flex items-center gap-1.5">
               <Icons.Phone className="w-4 h-4 text-gold" />
-              +91 98765 43210
+              +91 78930 45803
             </span>
           </div>
           <div className="flex gap-4 items-center">

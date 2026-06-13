@@ -8,10 +8,10 @@ export const metadata = {
 };
 
 const contactInfo = [
-  { icon: 'Phone', label: 'Phone', value: '+91 98765 43210', href: 'tel:+919876543210' },
-  { icon: 'Enquiries', label: 'Email', value: 'info@zionbridgetechnologies.com', href: 'mailto:info@zionbridgetechnologies.com' },
+  { icon: 'Phone', label: 'Phone', value: '+91 78930 45803', href: 'tel:+917893045803' },
+  { icon: 'Enquiries', label: 'Email', value: 'zionbridgetechnologies@gmail.com', href: 'mailto:zionbridgetechnologies@gmail.com' },
   { icon: 'Location', label: 'Address', value: '123, Business Street, Corporate Park, India', href: '#' },
-  { icon: 'WhatsApp', label: 'WhatsApp', value: '+91 98765 43210', href: 'https://wa.me/919876543210' },
+  { icon: 'WhatsApp', label: 'WhatsApp', value: '+91 78930 45803', href: 'https://wa.me/917893045803' },
 ] as const;
 
 export default function ContactPage() {

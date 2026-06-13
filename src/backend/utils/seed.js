@@ -15,10 +15,10 @@ const seedAdmin = async () => {
 
     // Seed default settings
     const defaults = [
-      { key: 'company_phone', value: '+91 98765 43210' },
-      { key: 'company_email', value: 'info@zionbridgetechnologies.com' },
+      { key: 'company_phone', value: '+91 78930 45803' },
+      { key: 'company_email', value: 'zionbridgetechnologies@gmail.com' },
       { key: 'company_address', value: '123, Business Street, Corporate Park, India' },
-      { key: 'whatsapp_number', value: '919876543210' },
+      { key: 'whatsapp_number', value: '917893045803' },
       { key: 'students_trained', value: '25000' },
       { key: 'placements', value: '15000' },
       { key: 'hiring_companies', value: '250' },

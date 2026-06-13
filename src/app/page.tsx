@@ -160,11 +160,11 @@ export default function HomePage() {
                 ))}
               </div>
               <div className="flex gap-4 mt-8">
-                <a href="https://wa.me/919876543210" target="_blank" className="flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors">
+                <a href="https://wa.me/917893045803" target="_blank" className="flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors">
                   <Icons.WhatsApp className="w-5 h-5 text-white" />
                   <span>WhatsApp</span>
                 </a>
-                <a href="tel:+919876543210" className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-colors">
+                <a href="tel:+917893045803" className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-colors">
                   <Icons.Phone className="w-5 h-5 text-white" />
                   <span>Call Now</span>
                 </a>

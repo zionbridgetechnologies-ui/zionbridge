@@ -35,10 +35,10 @@ const sendEnquiryConfirmation = async ({ name, email, courseInterest }) => {
             </ul>
           </div>
           <div style="text-align:center;margin:30px 0;">
-            <a href="https://wa.me/919876543210" style="background:#D4AF37;color:#0B1F4D;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:16px;">💬 WhatsApp Us Now</a>
+            <a href="https://wa.me/917893045803" style="background:#D4AF37;color:#0B1F4D;padding:14px 32px;border-radius:8px;text-decoration:none;font-weight:700;font-size:16px;">💬 WhatsApp Us Now</a>
           </div>
           <hr style="border:none;border-top:1px solid #eee;margin:30px 0;">
-          <p style="color:#999;font-size:12px;text-align:center;">Zionbridge Technologies | Training & Placement | HR Recruitment | IT Services<br>📞 +91 98765 43210 | 📧 info@zionbridgetechnologies.com</p>
+          <p style="color:#999;font-size:12px;text-align:center;">Zionbridge Technologies | Training & Placement | HR Recruitment | IT Services<br>📞 +91 78930 45803 | 📧 zionbridgetechnologies@gmail.com</p>
         </div>
       </div>
     `
