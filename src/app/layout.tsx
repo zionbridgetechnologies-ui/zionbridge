@@ -3,6 +3,7 @@ import './globals.css'
 import { Toaster } from 'react-hot-toast'
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://zionbridge.vercel.app'),
   title: 'Zionbridge Technologies | Training & Placement | HR Recruitment | IT Services',
   description: 'Zionbridge Technologies offers industry-expert training, 100% placement assistance, HR recruitment, IT services, certifications, internships, and career guidance. Launch your dream career today.',
   keywords: 'training and placement company, placement training, networking training, software training, HR recruitment, IT services, career guidance, private bank jobs, internship programs, CCNA, Python, Java, Full Stack',
@@ -10,7 +11,14 @@ export const metadata: Metadata = {
     title: 'Zionbridge Technologies | Training & Placement',
     description: 'Launch Your Dream Career with Expert Training & 100% Placement Support',
     type: 'website',
-  }
+    url: 'https://zionbridge.vercel.app',
+    siteName: 'Zionbridge Technologies',
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Zionbridge Technologies | Training & Placement',
+    description: 'Launch Your Dream Career with Expert Training & 100% Placement Support',
+  },
 }
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {

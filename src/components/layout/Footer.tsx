@@ -20,8 +20,17 @@ export default function Footer() {
             </div>
             <p className="text-gray-400 text-sm leading-relaxed mb-6">Zionbridge Technologies is a leading training & placement company providing industry-focused training, placement assistance, HR recruitment, consultancy, IT services and more.</p>
             <div className="flex gap-3">
-              {['f', 't', 'in', 'ig', 'yt'].map(s => (
-                <a key={s} href="#" className="w-9 h-9 rounded-lg bg-white/10 hover:bg-gold hover:text-primary flex items-center justify-center text-xs font-bold transition-all duration-300 uppercase">{s}</a>
+              {[
+                { Icon: Icons.Facebook, href: 'https://facebook.com', label: 'Facebook' },
+                { Icon: Icons.Twitter, href: 'https://twitter.com', label: 'Twitter' },
+                { Icon: Icons.LinkedIn, href: 'https://linkedin.com', label: 'LinkedIn' },
+                { Icon: Icons.Instagram, href: 'https://instagram.com', label: 'Instagram' },
+                { Icon: Icons.YouTube, href: 'https://youtube.com', label: 'YouTube' },
+              ].map(({ Icon, href, label }) => (
+                <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                  className="w-9 h-9 rounded-lg bg-white/10 hover:bg-gold hover:text-primary flex items-center justify-center transition-all duration-300">
+                  <Icon className="w-4 h-4" />
+                </a>
               ))}
             </div>
           </div>
@@ -73,7 +82,7 @@ export default function Footer() {
 
       <div className="border-t border-white/10">
         <div className="max-w-7xl mx-auto px-4 py-5 flex flex-col md:flex-row justify-between items-center gap-3 text-sm text-gray-500">
-          <span>© 2024 Zionbridge Technologies. All Rights Reserved.</span>
+          <span>© {new Date().getFullYear()} Zionbridge Technologies. All Rights Reserved.</span>
           <div className="flex gap-6">
             <Link href="/privacy" className="hover:text-gold transition-colors">Privacy Policy</Link>
             <Link href="/terms" className="hover:text-gold transition-colors">Terms & Conditions</Link>

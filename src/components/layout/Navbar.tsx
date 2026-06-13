@@ -59,9 +59,18 @@ export default function Navbar() {
             </span>
           </div>
           <div className="flex gap-4 items-center">
-            <span>Follow Us:</span>
-            {['Facebook', 'Twitter', 'LinkedIn', 'Instagram', 'YouTube'].map(s => (
-              <a key={s} href="#" className="hover:text-gold transition-colors">{s[0]}</a>
+            <span className="text-gray-400">Follow Us:</span>
+            {[
+              { Icon: Icons.Facebook, href: 'https://facebook.com', label: 'Facebook' },
+              { Icon: Icons.Twitter, href: 'https://twitter.com', label: 'Twitter' },
+              { Icon: Icons.LinkedIn, href: 'https://linkedin.com', label: 'LinkedIn' },
+              { Icon: Icons.Instagram, href: 'https://instagram.com', label: 'Instagram' },
+              { Icon: Icons.YouTube, href: 'https://youtube.com', label: 'YouTube' },
+            ].map(({ Icon, href, label }) => (
+              <a key={label} href={href} target="_blank" rel="noopener noreferrer" aria-label={label}
+                className="hover:text-gold transition-colors">
+                <Icon className="w-3.5 h-3.5" />
+              </a>
             ))}
           </div>
         </div>
