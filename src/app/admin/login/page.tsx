@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { adminLogin } from '@/lib/api';
 import toast from 'react-hot-toast';
+import { Icons } from '@/components/ui/Icons';
 
 export default function AdminLogin() {
   const [form, setForm] = useState({ email: '', password: '' });
@@ -42,8 +43,15 @@ export default function AdminLogin() {
             <label className="block text-sm font-medium text-gray-700 mb-1.5">Password</label>
             <input className="input-field" type="password" placeholder="Enter your password" value={form.password} onChange={e => setForm({ ...form, password: e.target.value })} required />
           </div>
-          <button type="submit" disabled={loading} className="btn-primary w-full justify-center py-3.5 text-base">
-            {loading ? '⏳ Signing in...' : '🔐 Sign In'}
+          <button type="submit" disabled={loading} className="btn-primary w-full justify-center py-3.5 text-base flex items-center gap-2">
+            {loading ? (
+              <span>Signing in...</span>
+            ) : (
+              <>
+                <Icons.Lock className="w-5 h-5 text-primary shrink-0" />
+                <span>Sign In</span>
+              </>
+            )}
           </button>
         </form>
       </div>

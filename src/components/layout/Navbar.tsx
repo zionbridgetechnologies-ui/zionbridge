@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { Bars3Icon, XMarkIcon, ChevronDownIcon } from '@heroicons/react/24/outline';
 import { motion, AnimatePresence } from 'framer-motion';
+import { Icons } from '@/components/ui/Icons';
 
 const navLinks = [
   { label: 'Home', href: '/' },
@@ -48,8 +49,14 @@ export default function Navbar() {
       <div className="bg-primary text-white text-xs py-2 px-4 hidden md:block">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="flex gap-6 items-center">
-            <span>📧 info@zionbridgetechnologies.com</span>
-            <span>📞 +91 98765 43210</span>
+            <span className="flex items-center gap-1.5">
+              <Icons.Enquiries className="w-4 h-4 text-gold" />
+              info@zionbridgetechnologies.com
+            </span>
+            <span className="flex items-center gap-1.5">
+              <Icons.Phone className="w-4 h-4 text-gold" />
+              +91 98765 43210
+            </span>
           </div>
           <div className="flex gap-4 items-center">
             <span>Follow Us:</span>

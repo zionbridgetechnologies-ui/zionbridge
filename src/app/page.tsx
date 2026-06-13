@@ -6,32 +6,32 @@ import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import LeadCaptureModal from '@/components/ui/LeadCaptureModal';
 import EnquiryForm from '@/components/ui/EnquiryForm';
 import Link from 'next/link';
-import { motion } from 'framer-motion';
+import { Icons } from '@/components/ui/Icons';
 
 const whyChoose = [
-  { icon: '🎓', title: 'Expert Trainers', desc: 'Learn from industry professionals with 10+ years real-world experience.' },
-  { icon: '💼', title: 'Real-Time Experience', desc: 'Work on live projects and real-time scenarios from day one.' },
-  { icon: '🎤', title: 'Mock Interviews', desc: 'Technical & HR interview preparation with industry experts.' },
-  { icon: '🤝', title: 'Placement Support', desc: '100% placement assistance with dedicated placement cell.' },
-  { icon: '🧭', title: 'Career Guidance', desc: 'Personalized career counseling to align your goals.' },
-  { icon: '📜', title: 'Certifications', desc: 'Industry-recognized certifications upon course completion.' },
+  { iconKey: 'ExpertTrainers', title: 'Expert Trainers', desc: 'Learn from industry professionals with 10+ years real-world experience.' },
+  { iconKey: 'RealTimeExperience', title: 'Real-Time Experience', desc: 'Work on live projects and real-time scenarios from day one.' },
+  { iconKey: 'MockInterviews', title: 'Mock Interviews', desc: 'Technical & HR interview preparation with industry experts.' },
+  { iconKey: 'PlacementSupport', title: 'Placement Support', desc: '100% placement assistance with dedicated placement cell.' },
+  { iconKey: 'CareerGuidance', title: 'Career Guidance', desc: 'Personalized career counseling to align your goals.' },
+  { iconKey: 'Certifications', title: 'Certifications', desc: 'Industry-recognized certifications upon course completion.' },
 ];
 
 const services = [
-  { icon: '👥', title: 'HR Recruitment', desc: 'End-to-end recruitment solutions for companies of all sizes.', href: '/services#hr-recruitment' },
-  { icon: '🏢', title: 'Internship Programs', desc: 'Real-time internships with certification and placement support.', href: '/services#internship' },
-  { icon: '💻', title: 'IT Services & Consultancy', desc: 'Custom IT solutions for your business growth.', href: '/services#it-services' },
-  { icon: '📱', title: 'Digital Marketing', desc: 'SEO, SMM, branding & digital growth strategies.', href: '/services#digital-marketing' },
-  { icon: '🎨', title: 'Creative Services', desc: 'Logo design, thumbnails, graphics & branding.', href: '/services#creative' },
-  { icon: '📸', title: 'Photography Services', desc: 'Weddings, events, birthdays, model & corporate shoots.', href: '/services#photography' },
+  { iconKey: 'HRRecruitment', title: 'HR Recruitment', desc: 'End-to-end recruitment solutions for companies of all sizes.', href: '/services#hr-recruitment' },
+  { iconKey: 'Internship', title: 'Internship Programs', desc: 'Real-time internships with certification and placement support.', href: '/services#internship' },
+  { iconKey: 'ITServices', title: 'IT Services & Consultancy', desc: 'Custom IT solutions for your business growth.', href: '/services#it-services' },
+  { iconKey: 'DigitalMarketing', title: 'Digital Marketing', desc: 'SEO, SMM, branding & digital growth strategies.', href: '/services#digital-marketing' },
+  { iconKey: 'CreativeServices', title: 'Creative Services', desc: 'Logo design, thumbnails, graphics & branding.', href: '/services#creative' },
+  { iconKey: 'Photography', title: 'Photography Services', desc: 'Weddings, events, birthdays, model & corporate shoots.', href: '/services#photography' },
 ];
 
 const placementSteps = [
-  { step: '01', icon: '📚', title: 'Training', desc: 'Industry expert training' },
-  { step: '02', icon: '🖥️', title: 'Real-Time Experience', desc: 'Hands-on live projects' },
-  { step: '03', icon: '📄', title: 'Resume Building', desc: 'Professional resume preparation' },
-  { step: '04', icon: '🎤', title: 'Mock Interviews', desc: 'Technical & HR interviews' },
-  { step: '05', icon: '🤝', title: 'Placement Support', desc: '100% placement assistance' },
+  { step: '01', iconKey: 'Training', title: 'Training', desc: 'Industry expert training' },
+  { step: '02', iconKey: 'RealTimeExperience', title: 'Real-Time Experience', desc: 'Hands-on live projects' },
+  { step: '03', iconKey: 'ResumeBuilding', title: 'Resume Building', desc: 'Professional resume preparation' },
+  { step: '04', iconKey: 'MockInterviews', title: 'Mock Interviews', desc: 'Technical & HR interviews' },
+  { step: '05', iconKey: 'PlacementSupport', title: 'Placement Support', desc: '100% placement assistance' },
 ];
 
 const partners = ['Tata', 'Infosys', 'Wipro', 'HCL', 'Tech Mahindra', 'Accenture', 'Cognizant', 'Capgemini'];
@@ -52,15 +52,20 @@ export default function HomePage() {
             <h2 className="section-title">Why Zionbridge Technologies?</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {whyChoose.map((item, i) => (
-              <div key={i} className="card p-6 flex gap-4 items-start group">
-                <div className="w-14 h-14 rounded-2xl bg-primary/5 group-hover:bg-gold/10 flex items-center justify-center text-2xl shrink-0 transition-colors">{item.icon}</div>
-                <div>
-                  <h3 className="font-bold text-primary mb-1">{item.title}</h3>
-                  <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+            {whyChoose.map((item, i) => {
+              const Icon = Icons[item.iconKey as keyof typeof Icons];
+              return (
+                <div key={i} className="card p-6 flex gap-4 items-start group">
+                  <div className="w-14 h-14 rounded-2xl bg-primary/5 group-hover:bg-gold/10 flex items-center justify-center text-primary group-hover:text-gold shrink-0 transition-colors">
+                    {Icon && <Icon className="w-6 h-6" />}
+                  </div>
+                  <div>
+                    <h3 className="font-bold text-primary mb-1">{item.title}</h3>
+                    <p className="text-gray-500 text-sm leading-relaxed">{item.desc}</p>
+                  </div>
                 </div>
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -74,17 +79,22 @@ export default function HomePage() {
             <div className="text-gold font-semibold uppercase tracking-widest text-sm mb-2">Our Placement Process</div>
             <h2 className="text-3xl md:text-4xl font-bold text-white">We Guide You At Every Step</h2>
           </div>
-          <div className="flex flex-col md:flex-row items-center justify-center gap-4 md:gap-2">
-            {placementSteps.map((step, i) => (
-              <div key={i} className="flex items-center gap-2 md:gap-3">
-                <div className="text-center">
-                  <div className="w-16 h-16 rounded-full border-2 border-gold/50 bg-white/10 flex items-center justify-center text-2xl mb-2 mx-auto">{step.icon}</div>
-                  <div className="text-gold font-bold text-sm">{step.title}</div>
-                  <div className="text-blue-200 text-xs mt-0.5">{step.desc}</div>
+          <div className="flex flex-col md:flex-row items-center justify-center gap-8 md:gap-2">
+            {placementSteps.map((step, i) => {
+              const Icon = Icons[step.iconKey as keyof typeof Icons];
+              return (
+                <div key={i} className="flex items-center gap-2 md:gap-3">
+                  <div className="text-center">
+                    <div className="w-16 h-16 rounded-full border-2 border-gold/50 bg-white/10 flex items-center justify-center mb-2 mx-auto">
+                      {Icon && <Icon className="w-6 h-6 text-gold" />}
+                    </div>
+                    <div className="text-gold font-bold text-sm">{step.title}</div>
+                    <div className="text-blue-200 text-xs mt-0.5">{step.desc}</div>
+                  </div>
+                  {i < placementSteps.length - 1 && <div className="hidden md:block text-gold text-2xl font-light rotate-0">→</div>}
                 </div>
-                {i < placementSteps.length - 1 && <div className="hidden md:block text-gold text-2xl font-light rotate-0">→</div>}
-              </div>
-            ))}
+              );
+            })}
           </div>
         </div>
       </section>
@@ -97,14 +107,21 @@ export default function HomePage() {
             <h2 className="section-title">Beyond Training — We Provide More</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-            {services.map((s, i) => (
-              <div key={i} className="card p-6 group">
-                <div className="text-3xl mb-3">{s.icon}</div>
-                <h3 className="font-bold text-primary mb-2 group-hover:text-gold transition-colors">{s.title}</h3>
-                <p className="text-gray-500 text-sm mb-4">{s.desc}</p>
-                <Link href={s.href} className="text-gold text-sm font-semibold hover:underline">Read More →</Link>
-              </div>
-            ))}
+            {services.map((s, i) => {
+              const Icon = Icons[s.iconKey as keyof typeof Icons];
+              return (
+                <div key={i} className="card p-6 group flex flex-col h-full justify-between">
+                  <div>
+                    <div className="w-12 h-12 rounded-xl bg-primary/5 group-hover:bg-gold/10 flex items-center justify-center text-primary group-hover:text-gold mb-4 transition-colors">
+                      {Icon && <Icon className="w-6 h-6" />}
+                    </div>
+                    <h3 className="font-bold text-primary mb-2 group-hover:text-gold transition-colors">{s.title}</h3>
+                    <p className="text-gray-500 text-sm mb-4 leading-relaxed">{s.desc}</p>
+                  </div>
+                  <Link href={s.href} className="text-gold text-sm font-semibold hover:underline flex items-center gap-1">Read More →</Link>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
@@ -144,10 +161,12 @@ export default function HomePage() {
               </div>
               <div className="flex gap-4 mt-8">
                 <a href="https://wa.me/919876543210" target="_blank" className="flex items-center gap-2 bg-green-500 text-white px-6 py-3 rounded-xl font-semibold hover:bg-green-600 transition-colors">
-                  💬 WhatsApp
+                  <Icons.WhatsApp className="w-5 h-5 text-white" />
+                  <span>WhatsApp</span>
                 </a>
                 <a href="tel:+919876543210" className="flex items-center gap-2 bg-primary text-white px-6 py-3 rounded-xl font-semibold hover:bg-primary-light transition-colors">
-                  📞 Call Now
+                  <Icons.Phone className="w-5 h-5 text-white" />
+                  <span>Call Now</span>
                 </a>
               </div>
             </div>

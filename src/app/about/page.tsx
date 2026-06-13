@@ -1,16 +1,17 @@
 import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import EnquiryForm from '@/components/ui/EnquiryForm';
+import { Icons } from '@/components/ui/Icons';
 
 export const metadata = {
   title: 'About Us | Zionbridge Technologies',
 };
 
 const values = [
-  { icon: '🎯', title: 'Excellence', desc: 'We deliver world-class training and career support with highest quality standards.' },
-  { icon: '🤝', title: 'Integrity', desc: 'We build trust through honest guidance and transparent processes.' },
-  { icon: '🚀', title: 'Innovation', desc: 'We continuously update our curriculum to stay ahead of industry trends.' },
-  { icon: '❤️', title: 'Student First', desc: 'Every decision we make is focused on student success and career growth.' },
+  { iconKey: 'Excellence', title: 'Excellence', desc: 'We deliver world-class training and career support with highest quality standards.' },
+  { iconKey: 'Integrity', title: 'Integrity', desc: 'We build trust through honest guidance and transparent processes.' },
+  { iconKey: 'Innovation', title: 'Innovation', desc: 'We continuously update our curriculum to stay ahead of industry trends.' },
+  { iconKey: 'StudentFirst', title: 'Student First', desc: 'Every decision we make is focused on student success and career growth.' },
 ];
 
 const team = [
@@ -73,13 +74,18 @@ export default function AboutPage() {
             <h2 className="section-title">What Drives Us</h2>
           </div>
           <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            {values.map((v, i) => (
-              <div key={i} className="card p-6 text-center group">
-                <div className="text-4xl mb-4 group-hover:scale-110 transition-transform inline-block">{v.icon}</div>
-                <h3 className="font-bold text-primary mb-2">{v.title}</h3>
-                <p className="text-gray-500 text-sm">{v.desc}</p>
-              </div>
-            ))}
+            {values.map((v, i) => {
+              const Icon = Icons[v.iconKey as keyof typeof Icons];
+              return (
+                <div key={i} className="card p-6 text-center group flex flex-col items-center">
+                  <div className="w-16 h-16 rounded-2xl bg-primary/5 group-hover:bg-gold/10 flex items-center justify-center text-primary group-hover:text-gold mb-4 transition-transform shrink-0 duration-300 group-hover:scale-105">
+                    {Icon && <Icon className="w-8 h-8" />}
+                  </div>
+                  <h3 className="font-bold text-primary mb-2">{v.title}</h3>
+                  <p className="text-gray-500 text-sm leading-relaxed">{v.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>

@@ -2,6 +2,7 @@
 import { useState, useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { fetchTestimonials } from '@/lib/api';
+import { Icons } from '@/components/ui/Icons';
 
 export default function TestimonialsSection() {
   const [testimonials, setTestimonials] = useState<any[]>([]);
@@ -38,7 +39,7 @@ export default function TestimonialsSection() {
                 </div>
               </div>
               <div className="flex gap-0.5 mb-3">
-                {Array(t.rating).fill('⭐').map((s, j) => <span key={j} className="text-sm">{s}</span>)}
+                {Array(t.rating).fill(0).map((_, j) => <Icons.Star key={j} className="w-4 h-4 text-gold fill-gold shrink-0" />)}
               </div>
               <p className="text-gray-600 text-sm leading-relaxed italic mb-3">"{t.review}"</p>
               {t.placedSalary && (

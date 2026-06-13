@@ -17,7 +17,7 @@ export default function EnquiryForm({ type = 'general', title = 'Get Free Career
     setLoading(true);
     try {
       await submitEnquiry({ ...form, type });
-      toast.success('✅ Thank you! We will contact you within 24 hours.');
+      toast.success('Thank you! We will contact you within 24 hours.');
       setForm({ name: '', email: '', phone: '', courseInterest: '', message: '' });
     } catch { toast.error('Something went wrong. Please try again.'); }
     finally { setLoading(false); }
@@ -41,7 +41,7 @@ export default function EnquiryForm({ type = 'general', title = 'Get Free Career
         </select>
         <textarea className={`${inputCls} resize-none`} rows={3} placeholder="Your message or questions..." value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
         <button type="submit" disabled={loading} className="btn-primary w-full justify-center py-3.5 text-base">
-          {loading ? '⏳ Submitting...' : '🚀 Submit Enquiry'}
+          {loading ? 'Submitting...' : 'Submit Enquiry'}
         </button>
       </form>
     </div>

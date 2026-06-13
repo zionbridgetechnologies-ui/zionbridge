@@ -5,6 +5,8 @@ import { XMarkIcon } from '@heroicons/react/24/outline';
 import { submitEnquiry } from '@/lib/api';
 import toast from 'react-hot-toast';
 
+import { Icons } from '@/components/ui/Icons';
+
 const courses = ['Full Stack Development', 'Python Programming', 'CCNA Networking', 'HR Generalist', 'Java Full Stack', 'Banking Jobs Prep', 'DevOps & Cloud', 'AI/ML Tools', 'Digital Marketing', 'Other'];
 
 export default function LeadCaptureModal() {
@@ -28,7 +30,7 @@ export default function LeadCaptureModal() {
     setLoading(true);
     try {
       await submitEnquiry({ ...form, type: 'general' });
-      toast.success('🎉 Thank you! We will contact you soon.');
+      toast.success('Thank you! We will contact you soon.');
       close();
     } catch {
       toast.error('Something went wrong. Please try again.');
@@ -48,7 +50,10 @@ export default function LeadCaptureModal() {
               <button onClick={close} className="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/20 hover:bg-white/30 flex items-center justify-center transition-colors">
                 <XMarkIcon className="w-5 h-5" />
               </button>
-              <div className="text-gold font-semibold text-sm uppercase tracking-widest mb-2">🎓 Free Career Guidance</div>
+              <div className="flex items-center gap-2 mb-2 text-gold font-semibold text-sm uppercase tracking-widest">
+                <Icons.ExpertTrainers className="w-5 h-5 text-gold shrink-0" />
+                <span>Free Career Guidance</span>
+              </div>
               <h2 className="text-2xl font-bold mb-1">Start Your Career Journey</h2>
               <p className="text-blue-200 text-sm">Get a free counseling session with our experts. 100% Placement Assistance Guaranteed!</p>
               <div className="flex gap-4 mt-4 text-xs">
@@ -73,7 +78,7 @@ export default function LeadCaptureModal() {
               </select>
               <textarea className="input-field resize-none" rows={2} placeholder="Any specific questions? (optional)" value={form.message} onChange={e => setForm({ ...form, message: e.target.value })} />
               <button type="submit" disabled={loading} className="btn-primary w-full justify-center text-base py-3.5">
-                {loading ? '⏳ Submitting...' : '🚀 Get Free Career Guidance'}
+                {loading ? 'Submitting...' : 'Get Free Career Guidance'}
               </button>
               <p className="text-center text-xs text-gray-400">By submitting, you agree to be contacted by our team. No spam ever.</p>
             </form>

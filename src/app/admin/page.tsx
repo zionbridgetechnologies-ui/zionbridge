@@ -4,16 +4,15 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getMe, getEnquiries, getAllCourses, getAllJobs, getApplications } from '@/lib/api';
 import toast from 'react-hot-toast';
+import AdminSidebar from '@/components/layout/AdminSidebar';
+import { Icons } from '@/components/ui/Icons';
 
-const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: '📊' },
-  { href: '/admin/enquiries', label: 'Enquiries', icon: '📩' },
-  { href: '/admin/courses', label: 'Courses', icon: '🎓' },
-  { href: '/admin/jobs', label: 'Jobs', icon: '💼' },
-  { href: '/admin/testimonials', label: 'Testimonials', icon: '⭐' },
-  { href: '/admin/applications', label: 'Applications', icon: '📋' },
-  { href: '/admin/settings', label: 'Settings', icon: '⚙️' },
-];
+const colorCls: Record<string, string> = {
+  blue: 'bg-blue-50 text-blue-600',
+  gold: 'bg-amber-50 text-gold',
+  purple: 'bg-purple-50 text-purple-600',
+  green: 'bg-green-50 text-green-600',
+};
 
 export default function AdminDashboard() {
   const router = useRouter();
@@ -36,38 +35,12 @@ export default function AdminDashboard() {
       .finally(() => setLoading(false));
   }, [router]);
 
-  const logout = () => {
-    localStorage.removeItem('zb_admin_token');
-    localStorage.removeItem('zb_admin');
-    router.push('/admin/login');
-    toast.success('Logged out');
-  };
-
   if (loading) return <div className="min-h-screen bg-gray-50 flex items-center justify-center"><div className="text-primary font-bold text-xl">Loading...</div></div>;
 
   return (
     <div className="min-h-screen bg-gray-50 flex">
       {/* Sidebar */}
-      <aside className="w-64 bg-primary text-white flex-shrink-0 flex flex-col min-h-screen">
-        <div className="p-6 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gold rounded-xl flex items-center justify-center"><span className="text-primary font-black text-lg">Z</span></div>
-            <div><div className="font-black">ZIONBRIDGE</div><div className="text-xs text-blue-300">Admin Panel</div></div>
-          </div>
-        </div>
-        <nav className="flex-1 p-4 space-y-1">
-          {navItems.map(item => (
-            <Link key={item.href} href={item.href}
-              className="flex items-center gap-3 px-3 py-2.5 rounded-xl hover:bg-white/10 text-sm font-medium transition-colors">
-              <span>{item.icon}</span> {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="p-4 border-t border-white/10">
-          <div className="text-sm text-blue-200 mb-2">👤 {admin?.name}</div>
-          <button onClick={logout} className="w-full text-left text-xs text-red-300 hover:text-red-200 transition-colors">🚪 Logout</button>
-        </div>
-      </aside>
+      <AdminSidebar />
 
       {/* Main */}
       <main className="flex-1 overflow-auto">
@@ -80,17 +53,24 @@ export default function AdminDashboard() {
           {/* Stats */}
           <div className="grid grid-cols-2 lg:grid-cols-4 gap-4 mb-8">
             {[
-              { label: 'Total Enquiries', value: stats.enquiries, icon: '📩', color: 'blue' },
-              { label: 'Active Courses', value: stats.courses, icon: '🎓', color: 'gold' },
-              { label: 'Active Jobs', value: stats.jobs, icon: '💼', color: 'purple' },
-              { label: 'Applications', value: stats.applications, icon: '📋', color: 'green' },
-            ].map(s => (
-              <div key={s.label} className="admin-card">
-                <div className="text-3xl mb-2">{s.icon}</div>
-                <div className="text-2xl font-black text-primary">{s.value}</div>
-                <div className="text-gray-500 text-sm">{s.label}</div>
-              </div>
-            ))}
+              { label: 'Total Enquiries', value: stats.enquiries, icon: 'Enquiries', color: 'blue' },
+              { label: 'Active Courses', value: stats.courses, icon: 'ExpertTrainers', color: 'gold' },
+              { label: 'Active Jobs', value: stats.jobs, icon: 'Briefcase', color: 'purple' },
+              { label: 'Applications', value: stats.applications, icon: 'Applications', color: 'green' },
+            ].map(s => {
+              const IconComponent = Icons[s.icon as keyof typeof Icons];
+              return (
+                <div key={s.label} className="admin-card flex items-center justify-between p-6">
+                  <div>
+                    <div className="text-2xl font-black text-primary">{s.value}</div>
+                    <div className="text-gray-500 text-sm mt-0.5">{s.label}</div>
+                  </div>
+                  <div className={`w-12 h-12 rounded-xl flex items-center justify-center shrink-0 ${colorCls[s.color] || 'bg-gray-100 text-gray-600'}`}>
+                    {IconComponent && <IconComponent className="w-6 h-6" />}
+                  </div>
+                </div>
+              );
+            })}
           </div>
 
           {/* Recent Enquiries */}
@@ -127,16 +107,21 @@ export default function AdminDashboard() {
           {/* Quick Links */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 mt-6">
             {[
-              { href: '/admin/courses', label: 'Manage Courses', icon: '🎓' },
-              { href: '/admin/jobs', label: 'Manage Jobs', icon: '💼' },
-              { href: '/admin/testimonials', label: 'Testimonials', icon: '⭐' },
-              { href: '/admin/settings', label: 'Site Settings', icon: '⚙️' },
-            ].map(l => (
-              <Link key={l.href} href={l.href} className="admin-card hover:shadow-md transition-shadow text-center group">
-                <div className="text-3xl mb-2 group-hover:scale-110 transition-transform inline-block">{l.icon}</div>
-                <div className="font-medium text-primary text-sm">{l.label}</div>
-              </Link>
-            ))}
+              { href: '/admin/courses', label: 'Manage Courses', icon: 'ExpertTrainers' },
+              { href: '/admin/jobs', label: 'Manage Jobs', icon: 'Briefcase' },
+              { href: '/admin/testimonials', label: 'Testimonials', icon: 'Star' },
+              { href: '/admin/settings', label: 'Site Settings', icon: 'Settings' },
+            ].map(l => {
+              const IconComponent = Icons[l.icon as keyof typeof Icons];
+              return (
+                <Link key={l.href} href={l.href} className="admin-card hover:shadow-md transition-all text-center group flex flex-col items-center justify-center p-6">
+                  <div className="w-12 h-12 rounded-full bg-primary/5 group-hover:bg-gold/10 flex items-center justify-center text-primary group-hover:text-gold mb-3 transition-colors duration-200">
+                    {IconComponent && <IconComponent className="w-6 h-6" />}
+                  </div>
+                  <div className="font-semibold text-primary text-sm group-hover:text-gold transition-colors duration-200">{l.label}</div>
+                </Link>
+              );
+            })}
           </div>
         </div>
       </main>

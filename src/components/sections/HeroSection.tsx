@@ -3,6 +3,7 @@ import { motion } from 'framer-motion';
 import Link from 'next/link';
 import CountUp from 'react-countup';
 import { useInView } from 'react-intersection-observer';
+import { Icons } from '@/components/ui/Icons';
 
 const stats = [
   { value: 10, suffix: '+', label: 'Years of Excellence' },
@@ -55,8 +56,8 @@ export default function HeroSection() {
 
             {/* CTA Buttons */}
             <div className="flex flex-wrap gap-4">
-              <Link href="/courses" className="btn-primary px-8 py-4 text-base">
-                🎓 Explore Programs
+              <Link href="/courses" className="btn-primary px-8 py-4 text-base flex items-center gap-2">
+                <Icons.ExpertTrainers className="w-5 h-5 text-gold shrink-0" /> Explore Programs
               </Link>
               <Link href="/contact#enquiry" className="btn-outline px-8 py-4 text-base">
                 Apply for Placement
@@ -77,21 +78,82 @@ export default function HeroSection() {
                 <div className="text-xs font-bold leading-tight">PLACEMENT ASSISTANCE</div>
               </motion.div>
 
-              {/* Main image placeholder */}
-              <div className="w-full h-[480px] bg-gradient-to-br from-blue-800/50 to-primary/80 rounded-3xl flex items-center justify-center border border-white/10 relative overflow-hidden">
-                <div className="text-center text-white/60">
-                  <div className="text-8xl mb-4">👩‍💻</div>
-                  <div className="text-lg font-medium">Your Success Journey Starts Here</div>
+              {/* Main premium visual */}
+              <div className="w-full h-[480px] bg-gradient-to-br from-blue-950 to-primary-dark rounded-3xl flex flex-col justify-between p-8 border border-white/10 relative overflow-hidden shadow-2xl">
+                {/* Visual grid background */}
+                <div className="absolute inset-0 opacity-10 bg-[radial-gradient(#D4AF37_1px,transparent_1px)] [background-size:16px_16px]" />
+                
+                {/* Dashboard Header Mockup */}
+                <div className="flex justify-between items-center relative z-10 border-b border-white/10 pb-4">
+                  <div className="flex gap-2">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-500" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-green-500" />
+                  </div>
+                  <div className="text-xxs text-blue-200/50 uppercase tracking-widest bg-white/5 px-3 py-1 rounded-full border border-white/5">
+                    Live Placement Analytics
+                  </div>
                 </div>
+
+                {/* Main Dashboard Chart/Graphic Mockup */}
+                <div className="flex-1 flex items-center justify-center relative z-10 my-4">
+                  {/* Career Growth Graph */}
+                  <svg className="w-full h-40 text-gold" viewBox="0 0 300 100" fill="none">
+                    <defs>
+                      <linearGradient id="chart-grad" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="0%" stopColor="#D4AF37" stopOpacity="0.4" />
+                        <stop offset="100%" stopColor="#D4AF37" stopOpacity="0" />
+                      </linearGradient>
+                    </defs>
+                    <path
+                      d="M10,80 Q50,40 90,65 T170,25 T250,15 L290,10"
+                      stroke="#D4AF37"
+                      strokeWidth="3"
+                      strokeLinecap="round"
+                    />
+                    <path
+                      d="M10,80 Q50,40 90,65 T170,25 T250,15 L290,10 L290,100 L10,100 Z"
+                      fill="url(#chart-grad)"
+                    />
+                    {/* Glowing dots */}
+                    <circle cx="90" cy="65" r="4" fill="#fff" stroke="#D4AF37" strokeWidth="2" />
+                    <circle cx="170" cy="25" r="4" fill="#fff" stroke="#D4AF37" strokeWidth="2" />
+                    <circle cx="290" cy="10" r="5" fill="#D4AF37" />
+                  </svg>
+                  
+                  {/* Floating visual items */}
+                  <div className="absolute inset-0 flex flex-col justify-between pointer-events-none">
+                    <div className="flex justify-between">
+                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-md translate-x-2 translate-y-2">
+                        <div className="text-xxs text-blue-200">Interview prep</div>
+                        <div className="text-xs font-bold text-white">Active session</div>
+                      </div>
+                      <div className="bg-white/5 border border-white/10 rounded-xl p-3 backdrop-blur-md -translate-x-2 translate-y-4">
+                        <div className="text-xxs text-blue-200">HR referrals</div>
+                        <div className="text-xs font-bold text-green-400">95% Match</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                {/* Footer status bar */}
+                <div className="flex justify-between items-center text-xs text-blue-200/60 relative z-10 border-t border-white/5 pt-4">
+                  <span className="flex items-center gap-1.5"><span className="w-1.5 h-1.5 rounded-full bg-green-500 animate-pulse" /> Platform Connected</span>
+                  <span>100+ Jobs Active Today</span>
+                </div>
+
                 {/* Floating cards */}
                 <motion.div animate={{ y: [0, -8, 0] }} transition={{ duration: 4, repeat: Infinity, delay: 1 }}
-                  className="absolute bottom-8 right-8 glass rounded-2xl p-4 text-white">
+                  className="absolute bottom-8 right-8 bg-white/10 border border-white/20 backdrop-blur-md rounded-2xl p-4 text-white">
                   <div className="text-gold font-bold text-lg">15K+</div>
                   <div className="text-xs text-white/80">Successful Placements</div>
                 </motion.div>
                 <motion.div animate={{ y: [0, 8, 0] }} transition={{ duration: 3.5, repeat: Infinity, delay: 0.5 }}
-                  className="absolute top-8 right-8 glass rounded-2xl p-4 text-white">
-                  <div className="text-gold font-bold">⭐ 4.9/5</div>
+                  className="absolute top-8 right-8 bg-white/10 border border-white/20 backdrop-blur-md rounded-2xl p-4 text-white">
+                  <div className="text-gold font-bold flex items-center gap-1 text-sm">
+                    <Icons.Star className="w-4 h-4 text-gold fill-gold shrink-0" />
+                    <span>4.9/5</span>
+                  </div>
                   <div className="text-xs text-white/80">Student Rating</div>
                 </motion.div>
               </div>

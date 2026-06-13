@@ -4,16 +4,8 @@ import { useRouter } from 'next/navigation';
 import Link from 'next/link';
 import { getAllTestimonials, createTestimonial, updateTestimonial, deleteTestimonial } from '@/lib/api';
 import toast from 'react-hot-toast';
-
-const navItems = [
-  { href: '/admin', label: 'Dashboard', icon: '📊' },
-  { href: '/admin/enquiries', label: 'Enquiries', icon: '📩' },
-  { href: '/admin/courses', label: 'Courses', icon: '🎓' },
-  { href: '/admin/jobs', label: 'Jobs', icon: '💼' },
-  { href: '/admin/testimonials', label: 'Testimonials', icon: '⭐' },
-  { href: '/admin/applications', label: 'Applications', icon: '📋' },
-  { href: '/admin/settings', label: 'Settings', icon: '⚙️' },
-];
+import AdminSidebar from '@/components/layout/AdminSidebar';
+import { Icons } from '@/components/ui/Icons';
 
 const empty = { name: '', designation: '', company: '', review: '', rating: 5, course: '', placedSalary: '', isActive: true };
 
@@ -51,29 +43,9 @@ export default function TestimonialsAdmin() {
     await deleteTestimonial(id); toast.success('Deleted'); load();
   };
 
-  const logout = () => { localStorage.removeItem('zb_admin_token'); router.push('/admin/login'); };
-
   return (
     <div className="min-h-screen bg-gray-50 flex">
-      <aside className="w-64 bg-primary text-white flex-shrink-0 flex flex-col">
-        <div className="p-6 border-b border-white/10">
-          <div className="flex items-center gap-3">
-            <div className="w-10 h-10 bg-gold rounded-xl flex items-center justify-center"><span className="text-primary font-black text-lg">Z</span></div>
-            <div><div className="font-black">ZIONBRIDGE</div><div className="text-xs text-blue-300">Admin Panel</div></div>
-          </div>
-        </div>
-        <nav className="flex-1 p-4 space-y-1">
-          {navItems.map(item => (
-            <Link key={item.href} href={item.href}
-              className={`flex items-center gap-3 px-3 py-2.5 rounded-xl text-sm font-medium transition-colors ${item.href === '/admin/testimonials' ? 'bg-white/20' : 'hover:bg-white/10'}`}>
-              <span>{item.icon}</span> {item.label}
-            </Link>
-          ))}
-        </nav>
-        <div className="p-4 border-t border-white/10">
-          <button onClick={logout} className="text-xs text-red-300 hover:text-red-200">🚪 Logout</button>
-        </div>
-      </aside>
+      <AdminSidebar />
 
       <main className="flex-1 overflow-auto p-8">
         <div className="flex justify-between items-center mb-6">
@@ -130,9 +102,16 @@ export default function TestimonialsAdmin() {
                 </div>
                 <span className={`px-2 py-0.5 rounded-full text-xs ${t.isActive ? 'bg-green-100 text-green-700' : 'bg-gray-100 text-gray-500'}`}>{t.isActive ? 'Active' : 'Hidden'}</span>
               </div>
-              <div className="flex gap-0.5 mb-2">{Array(t.rating).fill('⭐').map((s, i) => <span key={i} className="text-sm">{s}</span>)}</div>
+              <div className="flex gap-0.5 mb-2">
+                {Array(t.rating).fill(0).map((_, i) => <Icons.Star key={i} className="w-4 h-4 text-gold fill-gold shrink-0" />)}
+              </div>
               <p className="text-gray-600 text-xs italic mb-3 line-clamp-3">"{t.review}"</p>
-              {t.placedSalary && <div className="text-xs text-green-600 font-medium mb-3">💰 Placed at {t.placedSalary}</div>}
+              {t.placedSalary && (
+                <div className="text-xs text-green-600 font-semibold mb-3 flex items-center gap-1">
+                  <Icons.Currency className="w-4 h-4 text-green-600 shrink-0" />
+                  <span>Placed at {t.placedSalary}</span>
+                </div>
+              )}
               <div className="flex gap-2 pt-2 border-t border-gray-100">
                 <button onClick={() => openEdit(t)} className="text-blue-600 text-xs font-medium hover:underline">Edit</button>
                 <button onClick={() => del(t._id)} className="text-red-500 text-xs font-medium hover:underline">Delete</button>

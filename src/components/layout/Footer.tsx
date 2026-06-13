@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { Icons } from '@/components/ui/Icons';
 
 export default function Footer() {
   return (
@@ -49,10 +50,22 @@ export default function Footer() {
           <div>
             <h4 className="font-bold text-gold mb-4 text-sm uppercase tracking-wider">Contact Us</h4>
             <ul className="space-y-3 text-sm text-gray-400">
-              <li>📍 123, Business Street, Corporate Park, India</li>
-              <li>📞 <a href="tel:+919876543210" className="hover:text-gold">+91 98765 43210</a></li>
-              <li>📧 <a href="mailto:info@zionbridgetechnologies.com" className="hover:text-gold">info@zionbridgetechnologies.com</a></li>
-              <li>🌐 www.zionbridgetechnologies.com</li>
+              <li className="flex items-start gap-2.5">
+                <Icons.Location className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <span>123, Business Street, Corporate Park, India</span>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Icons.Phone className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <a href="tel:+919876543210" className="hover:text-gold">+91 98765 43210</a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Icons.Enquiries className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <a href="mailto:info@zionbridgetechnologies.com" className="hover:text-gold">info@zionbridgetechnologies.com</a>
+              </li>
+              <li className="flex items-start gap-2.5">
+                <Icons.Globe className="w-4 h-4 text-gold shrink-0 mt-0.5" />
+                <span>www.zionbridgetechnologies.com</span>
+              </li>
             </ul>
           </div>
         </div>
@@ -70,14 +83,14 @@ export default function Footer() {
 
       {/* Sticky WhatsApp */}
       <a href="https://wa.me/919876543210?text=Hi%2C%20I'm%20interested%20in%20Zionbridge%20Technologies%20programs" target="_blank" rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all duration-300 text-2xl">
-        💬
+        className="fixed bottom-6 left-6 z-50 w-14 h-14 bg-green-500 hover:bg-green-600 text-white rounded-full flex items-center justify-center shadow-xl hover:scale-110 transition-all duration-300">
+        <Icons.WhatsApp className="w-7 h-7 text-white" />
       </a>
 
       {/* Back to top */}
       <button onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
-        className="fixed bottom-6 right-6 z-50 w-10 h-10 bg-gold hover:bg-gold-dark text-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300 font-bold">
-        ↑
+        className="fixed bottom-6 right-6 z-50 w-10 h-10 bg-gold hover:bg-gold-dark text-primary rounded-full flex items-center justify-center shadow-lg hover:scale-110 transition-all duration-300">
+        <Icons.ArrowUp className="w-5 h-5 text-primary" />
       </button>
     </footer>
   );

@@ -5,6 +5,7 @@ import Footer from '@/components/layout/Footer';
 import { fetchJobs, submitApplication } from '@/lib/api';
 import { motion } from 'framer-motion';
 import toast from 'react-hot-toast';
+import { Icons } from '@/components/ui/Icons';
 
 const categories = [
   { key: 'all', label: 'All Jobs' },
@@ -80,11 +81,29 @@ export default function JobsPage() {
                     </div>
                     <span className="bg-primary/10 text-primary text-xs font-medium px-2 py-1 rounded-full capitalize">{job.category}</span>
                   </div>
-                  <div className="flex flex-wrap gap-3 mb-4 text-sm text-gray-600">
-                    {job.location && <span>📍 {job.location}</span>}
-                    {job.experience && <span>⏱ {job.experience}</span>}
-                    {job.salary && <span className="text-green-600 font-medium">💰 {job.salary}</span>}
-                    <span className="capitalize">🕐 {job.type}</span>
+                  <div className="flex flex-wrap gap-4 mb-4 text-sm text-gray-600 items-center">
+                    {job.location && (
+                      <span className="flex items-center gap-1">
+                        <Icons.Location className="w-4 h-4 text-gray-400 shrink-0" />
+                        {job.location}
+                      </span>
+                    )}
+                    {job.experience && (
+                      <span className="flex items-center gap-1">
+                        <Icons.Clock className="w-4 h-4 text-gray-400 shrink-0" />
+                        {job.experience}
+                      </span>
+                    )}
+                    {job.salary && (
+                      <span className="flex items-center gap-1 text-green-600 font-semibold">
+                        <Icons.Currency className="w-4 h-4 text-green-600 shrink-0" />
+                        {job.salary}
+                      </span>
+                    )}
+                    <span className="flex items-center gap-1 capitalize">
+                      <Icons.Briefcase className="w-4 h-4 text-gray-400 shrink-0" />
+                      {job.type}
+                    </span>
                   </div>
                   {job.description && <p className="text-gray-500 text-sm mb-4 line-clamp-2">{job.description}</p>}
                   <button onClick={() => setApplyJob(job)} className="btn-primary text-sm py-2.5">Apply Now →</button>
@@ -94,7 +113,7 @@ export default function JobsPage() {
           )}
           {!loading && jobs.length === 0 && (
             <div className="text-center py-16 text-gray-400">
-              <div className="text-5xl mb-4">💼</div>
+              <Icons.Briefcase className="w-16 h-16 text-gray-300 mx-auto mb-4" />
               <div className="font-medium">No jobs found in this category.</div>
               <div className="text-sm mt-1">Check back soon or contact us directly.</div>
             </div>
@@ -123,7 +142,7 @@ export default function JobsPage() {
               <input className="input-field" placeholder="Email Address" type="email" value={form.email} onChange={e => setForm({ ...form, email: e.target.value })} />
               <textarea className="input-field resize-none" rows={3} placeholder="Why are you a good fit? (optional)" value={form.coverLetter} onChange={e => setForm({ ...form, coverLetter: e.target.value })} />
               <button type="submit" disabled={submitting} className="btn-primary w-full justify-center py-3">
-                {submitting ? '⏳ Submitting...' : '🚀 Submit Application'}
+                {submitting ? 'Submitting...' : 'Submit Application'}
               </button>
             </form>
           </div>

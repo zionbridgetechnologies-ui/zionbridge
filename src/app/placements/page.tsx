@@ -2,17 +2,18 @@ import Navbar from '@/components/layout/Navbar';
 import Footer from '@/components/layout/Footer';
 import TestimonialsSection from '@/components/sections/TestimonialsSection';
 import EnquiryForm from '@/components/ui/EnquiryForm';
+import { Icons } from '@/components/ui/Icons';
 
 export const metadata = {
   title: 'Placements | Zionbridge Technologies',
 };
 
 const process = [
-  { step: '01', icon: '📚', title: 'Industry Training', desc: 'Get trained by experts with real-world curriculum tailored to industry needs.' },
-  { step: '02', icon: '🖥️', title: 'Live Projects', desc: 'Work on actual client projects to build a strong portfolio and hands-on experience.' },
-  { step: '03', icon: '📄', title: 'Resume Building', desc: 'Professional resume crafted by our HR experts to highlight your strengths.' },
-  { step: '04', icon: '🎤', title: 'Mock Interviews', desc: 'Face technical and HR mock interviews with detailed feedback sessions.' },
-  { step: '05', icon: '🤝', title: 'Placement Drive', desc: 'Get referred to our 250+ hiring partner companies for direct placement.' },
+  { step: '01', iconKey: 'Training', title: 'Industry Training', desc: 'Get trained by experts with real-world curriculum tailored to industry needs.' },
+  { step: '02', iconKey: 'RealTimeExperience', title: 'Live Projects', desc: 'Work on actual client projects to build a strong portfolio and hands-on experience.' },
+  { step: '03', iconKey: 'ResumeBuilding', title: 'Resume Building', desc: 'Professional resume crafted by our HR experts to highlight your strengths.' },
+  { step: '04', iconKey: 'MockInterviews', title: 'Mock Interviews', desc: 'Face technical and HR mock interviews with detailed feedback sessions.' },
+  { step: '05', iconKey: 'PlacementSupport', title: 'Placement Drive', desc: 'Get referred to our 250+ hiring partner companies for direct placement.' },
 ];
 
 const stats = [
@@ -56,14 +57,19 @@ export default function PlacementsPage() {
             <h2 className="section-title">Our Placement Process</h2>
           </div>
           <div className="grid md:grid-cols-3 lg:grid-cols-5 gap-6">
-            {process.map((p, i) => (
-              <div key={i} className="card p-6 text-center relative">
-                <div className="absolute -top-3 -right-3 w-8 h-8 bg-gold rounded-full flex items-center justify-center text-primary font-black text-xs">{p.step}</div>
-                <div className="text-4xl mb-3">{p.icon}</div>
-                <h3 className="font-bold text-primary mb-2 text-sm">{p.title}</h3>
-                <p className="text-gray-500 text-xs">{p.desc}</p>
-              </div>
-            ))}
+            {process.map((p, i) => {
+              const Icon = Icons[p.iconKey as keyof typeof Icons];
+              return (
+                <div key={i} className="card p-6 text-center relative flex flex-col items-center">
+                  <div className="absolute -top-3 -right-3 w-8 h-8 bg-gold rounded-full flex items-center justify-center text-primary font-black text-xs">{p.step}</div>
+                  <div className="w-16 h-16 rounded-2xl bg-primary/5 flex items-center justify-center text-primary mb-4 shrink-0">
+                    {Icon && <Icon className="w-8 h-8" />}
+                  </div>
+                  <h3 className="font-bold text-primary mb-2 text-sm">{p.title}</h3>
+                  <p className="text-gray-500 text-xs leading-relaxed">{p.desc}</p>
+                </div>
+              );
+            })}
           </div>
         </div>
       </section>
