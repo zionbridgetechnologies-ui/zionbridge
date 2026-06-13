@@ -39,6 +39,7 @@ export const submitApplication = (data: any) => api.post('/applications', data).
 
 // Admin API calls
 export const adminLogin = (data: any) => api.post('/auth/login', data).then(r => r.data);
+export const changePassword = (data: any) => api.put('/auth/change-password', data).then(r => r.data);
 export const getMe = () => api.get('/auth/me').then(r => r.data);
 export const getEnquiries = (params?: any) => api.get('/enquiries', { params }).then(r => r.data);
 export const getApplications = () => api.get('/applications').then(r => r.data);

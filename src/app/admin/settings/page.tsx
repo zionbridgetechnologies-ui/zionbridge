@@ -2,7 +2,7 @@
 import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
-import { fetchSettings, updateSettings } from '@/lib/api';
+import { fetchSettings, updateSettings, changePassword } from '@/lib/api';
 import toast from 'react-hot-toast';
 
 const navItems = [
@@ -19,6 +19,10 @@ export default function SettingsPage() {
   const router = useRouter();
   const [settings, setSettings] = useState<any>({});
   const [loading, setLoading] = useState(false);
+  const [currentPassword, setCurrentPassword] = useState('');
+  const [newPassword, setNewPassword] = useState('');
+  const [confirmPassword, setConfirmPassword] = useState('');
+  const [passwordLoading, setPasswordLoading] = useState(false);
 
   useEffect(() => {
     if (!localStorage.getItem('zb_admin_token')) { router.push('/admin/login'); return; }
@@ -30,6 +34,26 @@ export default function SettingsPage() {
     try { await updateSettings(settings); toast.success('Settings saved!'); }
     catch { toast.error('Failed to save settings'); }
     finally { setLoading(false); }
+  };
+
+  const handlePasswordChange = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (newPassword !== confirmPassword) {
+      toast.error('New passwords do not match');
+      return;
+    }
+    setPasswordLoading(true);
+    try {
+      await changePassword({ currentPassword, newPassword });
+      toast.success('Password updated successfully!');
+      setCurrentPassword('');
+      setNewPassword('');
+      setConfirmPassword('');
+    } catch (err: any) {
+      toast.error(err.response?.data?.error || 'Failed to change password');
+    } finally {
+      setPasswordLoading(false);
+    }
   };
 
   const set = (key: string, val: string) => setSettings((p: any) => ({ ...p, [key]: val }));
@@ -122,6 +146,53 @@ export default function SettingsPage() {
                 <span>📩</span><span className="text-sm font-medium">View All Enquiries</span>
               </Link>
             </div>
+          </div>
+
+          {/* Change Password */}
+          <div className="admin-card">
+            <h2 className="font-bold text-primary mb-4 text-primary flex items-center gap-2">🔒 Change Admin Password</h2>
+            <form onSubmit={handlePasswordChange} className="space-y-4">
+              <div>
+                <label className="text-sm font-medium text-gray-600 block mb-1">Current Password</label>
+                <input 
+                  type="password" 
+                  className="input-field" 
+                  placeholder="••••••••"
+                  value={currentPassword} 
+                  onChange={e => setCurrentPassword(e.target.value)} 
+                  required 
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-600 block mb-1">New Password</label>
+                <input 
+                  type="password" 
+                  className="input-field" 
+                  placeholder="••••••••"
+                  value={newPassword} 
+                  onChange={e => setNewPassword(e.target.value)} 
+                  required 
+                />
+              </div>
+              <div>
+                <label className="text-sm font-medium text-gray-600 block mb-1">Confirm New Password</label>
+                <input 
+                  type="password" 
+                  className="input-field" 
+                  placeholder="••••••••"
+                  value={confirmPassword} 
+                  onChange={e => setConfirmPassword(e.target.value)} 
+                  required 
+                />
+              </div>
+              <button 
+                type="submit" 
+                disabled={passwordLoading} 
+                className="btn-primary w-full flex justify-center items-center gap-2 mt-4"
+              >
+                {passwordLoading ? 'Updating...' : '🔑 Update Password'}
+              </button>
+            </form>
           </div>
         </div>
       </main>
