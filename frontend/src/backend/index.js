@@ -33,6 +33,27 @@ app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 // Static files for uploads
 app.use('/uploads', express.static('uploads'));
 
+let dbInitialized = false;
+
+// Middleware to verify database connection and seed admin on first request
+app.use(async (req, res, next) => {
+  if (!dbInitialized) {
+    try {
+      const { Admin } = require('./models');
+      await Admin.findOne();
+      
+      const { seedAdmin } = require('./utils/seed');
+      await seedAdmin();
+      
+      dbInitialized = true;
+      console.log('✅ Supabase Connected, verified and seeded (Serverless)');
+    } catch (err) {
+      console.error('❌ Supabase initialization error:', err.message);
+    }
+  }
+  next();
+});
+
 // Routes
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/enquiries', require('./routes/enquiries'));
@@ -47,7 +68,7 @@ app.use('/api/applications', require('./routes/applications'));
 
 // Health Check
 app.get('/api/health', (req, res) => {
-  res.json({ status: 'OK', message: 'Zionbridge Technologies API Running', timestamp: new Date() });
+  res.json({ status: 'OK', message: 'Zionbridge Technologies API Running (Serverless)', timestamp: new Date() });
 });
 
 // 404
@@ -61,27 +82,10 @@ app.use((err, req, res, next) => {
   res.status(err.status || 500).json({ error: err.message || 'Internal Server Error' });
 });
 
-// Verify database connection and seed admin
-const verifyDbAndStart = async () => {
-  try {
-    const { Admin } = require('./models');
-    // Test query to verify connection to Supabase
-    await Admin.findOne();
-    console.log('✅ Supabase Connected & verified');
-
-    // Seed admin user & settings
-    const { seedAdmin } = require('./utils/seed');
-    await seedAdmin();
-
-    const PORT = process.env.PORT || 5000;
-    app.listen(PORT, () => console.log(`🚀 Server running on port ${PORT}`));
-  } catch (err) {
-    console.error('❌ Supabase initialization error:', err.message);
-    console.error('Please make sure you have run the database schema SQL in your Supabase dashboard SQL Editor and populated the correct SUPABASE_SERVICE_ROLE_KEY and SUPABASE_URL in backend/.env');
-    process.exit(1);
-  }
-};
-
-verifyDbAndStart();
+// Start standalone server only when run directly (not under Vercel serverless / Next.js import)
+if (require.main === module || (!process.env.VERCEL && !process.env.NEXT_RUNTIME)) {
+  const PORT = process.env.PORT || 5000;
+  app.listen(PORT, () => console.log(`🚀 Standalone server running on port ${PORT}`));
+}
 
 module.exports = app;
